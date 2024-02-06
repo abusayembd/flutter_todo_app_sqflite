@@ -1,17 +1,17 @@
 class Todo {
 
-  String title;
+  String? title;
   String description;
-  String category;
-  String todoDate;
+  String? category;
+  String? todoDate;
   int isFinished;
 
   Todo({
 
-    required this.title,
+     this.title,
     required this.description,
-    required this.category,
-    required this.todoDate,
+     this.category,
+     this.todoDate,
     required this.isFinished,
   });
 

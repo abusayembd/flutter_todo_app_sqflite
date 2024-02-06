@@ -42,16 +42,16 @@ class _TodoScreenState extends State<TodoScreen> {
   DateTime _dateTime = DateTime.now();
 
   _selectedTodoDate(BuildContext context) async {
-    var _pickedDate = await showDatePicker(
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate: _dateTime,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-    if (_pickedDate != null) {
+    if (pickedDate != null) {
       setState(() {
-        _dateTime = _pickedDate;
-        _todoDateController.text = DateFormat('yyyy-MM-dd').format(_pickedDate);
+        _dateTime = pickedDate;
+        _todoDateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
       });
     }
   }
