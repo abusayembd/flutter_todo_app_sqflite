@@ -43,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.blue,
+            centerTitle: true,
             title: const Text("Todolist Sqflite"),
           ),
           drawer: const DrawerNavigation(),

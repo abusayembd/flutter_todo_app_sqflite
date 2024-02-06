@@ -3,6 +3,7 @@ import 'package:flutter_todolist_sqflite_app/screens/home_screen.dart';
 import 'package:flutter_todolist_sqflite_app/service/category_service.dart';
 
 import '../screens/categories_screen.dart';
+import '../screens/todos_by_category.dart';
 
 class DrawerNavigation extends StatefulWidget {
   const DrawerNavigation({super.key});
@@ -12,24 +13,28 @@ class DrawerNavigation extends StatefulWidget {
 }
 
 class _DrawerNavigationState extends State<DrawerNavigation> {
-  List<Widget> _categoryList = <Widget>[];
-  CategoryService _categoryService = CategoryService();
+  final List<Widget> _categoryList = <Widget>[];
+  final CategoryService _categoryService = CategoryService();
 
   @override
   void initState() {
     super.initState();
     getAllCategories();
   }
+
   getAllCategories() async {
     var categories = await _categoryService.readCategories();
     categories.forEach((category) {
       setState(() {
-        _categoryList.add(ListTile(
-          title: Text(category['name']),
-          onTap: () {
-
-          },
-        ));
+        _categoryList.add(
+          InkWell(
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) =>  TodosByCategory(category: category['name'],))),
+            child: ListTile(
+              title: Text(category['name']),
+            ),
+          ),
+        );
       });
     });
   }
@@ -57,9 +62,8 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             ListTile(
               leading: const Icon(Icons.view_list),
               title: const Text("Categories"),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const CategoriesScreen())),
-
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const CategoriesScreen())),
             ),
             const Divider(),
             Column(
