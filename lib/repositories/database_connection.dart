@@ -15,5 +15,10 @@ setDatabase() async {
 
   FutureOr<void> _onCreatingDatabase(Database database, int version)async {
   await database.execute('CREATE TABLE categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT)');
-  }
+    //create table todos
+    await database.execute('CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, category TEXT, todoDate TEXT, isFinished INTEGER)');
+}
+
+
+
 }
